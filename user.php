@@ -81,9 +81,11 @@ class User {
         var_dump($_SESSION);
         $this->id = $_SESSION[0]['0'];
         $reqinsert = mysqli_query($this->bdd,"UPDATE utilisateurs SET  login = '$login', email = '$email', password = '$password', firstname = '$firstname', lastname = '$lastname' WHERE id = $this->id");
-        var_dump($reqinsert);
-        var_dump($login); // putain de bordel, du coup c'est le $login qu'il faut envoyer ! évidemment !! putain!!!!!!!!!!!!!!!!! 2h pour cette connerie !!!!!!!
-        var_dump($this->login);
+        //var_dump($reqinsert);
+        //var_dump($login); // putain de bordel, du coup c'est le $login qu'il faut envoyer ! évidemment !! putain!!!!!!!!!!!!!!!!! 2h pour cette connerie !!!!!!!
+        //var_dump($this->login);
+        session_destroy();
+
         /*($this->bdd, "UPDATE utilisateurs SET  login = ".$this->login.", password = ".$this->password.", email = ".$this->email.", firstname = ".$this->firstname.", lastname = ".$this->lastname." WHERE 'id' = ".$_SESSION[0]['0']."");*/
 
     }
@@ -124,16 +126,17 @@ class User {
 }
 
 $user = new User(" ", "jojofou", "jojo", "jojo@aol.com", "Morera", "joan");
-/*$user->getLogin();
-$user->getEmail();
-$user->getFirstname();
-$user->getLastname();
-$user->getAllInfos();*/
-//$user->register("", "jojofou", "jojo", "jojo@aol.com", "Morera", "joan");
-$user->connect("jojofou", "jojo");
+
+//$user->register("", "jojojojo", "jojojojo", "jojo@aol.com", "Morera", "joan");
+$user->connect("joajoajojo", "jojaojojo");
 //$user->disconnect();
 //$user->delete();
 //var_dump($_SESSION);
-$user->update($login = "jojojojo", "jojojojo", "jojo@aol.com", "Morera", "joan");
+//$user->update("joajoajojo", "jojaojojo", "jojo@aol.com", "Morera", "joan");
+/*$user->getLogin();
+$user->getEmail();
+$user->getFirstname();*/
+//$user->getLastname();
+$user->getAllInfos();
 
 ?>
