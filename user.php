@@ -123,6 +123,12 @@ class User {
                         ]);
     }
 
+    public function isConnected() {
+        if($_SESSION == true) {
+            echo "utilisateur connecté";
+        }
+    }
+
 }
 
 $user = new User(" ", "jojofou", "jojo", "jojo@aol.com", "Morera", "joan");
@@ -137,6 +143,7 @@ $user->connect("joajoajojo", "jojaojojo");
 $user->getEmail();
 $user->getFirstname();*/
 //$user->getLastname();
-$user->getAllInfos();
+//$user->getAllInfos();
+$user->isConnected();
 
 ?>
