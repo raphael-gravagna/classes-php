@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*$bdd_username = 'root';
 $bdd_password = '';
 $bdd_name     = 'classes';
@@ -44,8 +45,17 @@ class User {
     public function connect($login,$password) {
         $reqselect = mysqli_query($this->bdd, "SELECT * FROM utilisateurs WHERE login = '$login' AND password = '$password'");
         $result = mysqli_fetch_all($reqselect); 
-        var_dump($result);
+        $_SESSION['login'] = $login;
+        $_SESSION['password'] = $password;
 
+
+        //var_dump($_SESSION);
+
+    }
+
+    public function disconnect() {
+        unset($_SESSION);
+        session_destroy();
     }
     /*$reqinsert = mysqli_query($bdd, "INSERT INTO utilisateurs(login, password) VALUES ('$login','$mdp')");*/
 
@@ -84,6 +94,7 @@ $user->getEmail();
 $user->getFirstname();
 $user->getLastname();
 $user->getAllInfos();
-$user->register("", "jojofou", "jojo", "jojo@aol.com", "Morera", "joan");*/
-$user->connect("jojofou", "jojo");
+$user->register("", "jojofou", "jojo", "jojo@aol.com", "Morera", "joan");
+$user->connect("jojofou", "jojo");*/
+$user->disconnect();
 ?>
