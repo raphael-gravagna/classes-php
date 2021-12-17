@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 /*$bdd_username = 'root';
 $bdd_password = '';
 $bdd_name     = 'classes';
@@ -45,8 +46,18 @@ class User {
     public function connect($login,$password) {
         $reqselect = mysqli_query($this->bdd, "SELECT * FROM utilisateurs WHERE login = '$login' AND password = '$password'");
         $result = mysqli_fetch_all($reqselect); 
-        $_SESSION['login'] = $login;
-        $_SESSION['password'] = $password;
+
+
+        $this->id = $result[0]['0'];
+        $this->login = $result[0]['1'];
+        $this->password = $result[0]['2'];
+        $this->email = $result[0]['3'];
+        $this->firstname = $result[0]['4'];
+        $this->lastname = $result[0]['5'];
+
+        $_SESSION = $result;
+        var_dump($this->id);
+        var_dump($_SESSION);
 
 
         //var_dump($_SESSION);
@@ -59,12 +70,29 @@ class User {
     }
 
     public function delete() {
-        $this->id = $_SESSION['login'];
+        $this->login = $_SESSION['login'];
         $reqdelete = mysqli_query($this->bdd, "DELETE FROM `utilisateurs` WHERE `login` = '$this->login'");
         session_destroy();
 
     }
-    /*$reqinsert = mysqli_query($bdd, "INSERT INTO utilisateurs(login, password) VALUES ('$login','$mdp')");*/
+
+    public function update($login, $password, $email, $firstname, $lastname) {
+        //$_SESSION = $result;
+        var_dump($_SESSION);
+        $this->id = $_SESSION[0]['0'];
+        $reqinsert = mysqli_query($this->bdd,"UPDATE utilisateurs SET  login = '$login', email = '$email', password = '$password', firstname = '$firstname', lastname = '$lastname' WHERE id = $this->id");
+        var_dump($reqinsert);
+        var_dump($login); // putain de bordel, du coup c'est le $login qu'il faut envoyer ! évidemment !! putain!!!!!!!!!!!!!!!!! 2h pour cette connerie !!!!!!!
+        var_dump($this->login);
+        /*($this->bdd, "UPDATE utilisateurs SET  login = ".$this->login.", password = ".$this->password.", email = ".$this->email.", firstname = ".$this->firstname.", lastname = ".$this->lastname." WHERE 'id' = ".$_SESSION[0]['0']."");*/
+
+    }
+
+    /*public function update($login, $password, $email, $firstname, $lastname) {
+        
+
+    }
+    $reqinsert = mysqli_query($bdd, "INSERT INTO utilisateurs(login, password) VALUES ('$login','$mdp')");*/
 
 
     public function getLogin() { 
@@ -100,10 +128,12 @@ $user = new User(" ", "jojofou", "jojo", "jojo@aol.com", "Morera", "joan");
 $user->getEmail();
 $user->getFirstname();
 $user->getLastname();
-$user->getAllInfos();
-$user->register("", "jojofou", "jojo", "jojo@aol.com", "Morera", "joan");*/
+$user->getAllInfos();*/
+//$user->register("", "jojofou", "jojo", "jojo@aol.com", "Morera", "joan");
 $user->connect("jojofou", "jojo");
 //$user->disconnect();
-$user->delete();
-var_dump($_SESSION);
+//$user->delete();
+//var_dump($_SESSION);
+$user->update($login = "jojojojo", "jojojojo", "jojo@aol.com", "Morera", "joan");
+
 ?>
