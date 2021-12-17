@@ -57,6 +57,13 @@ class User {
         unset($_SESSION);
         session_destroy();
     }
+
+    public function delete() {
+        $this->id = $_SESSION['login'];
+        $reqdelete = mysqli_query($this->bdd, "DELETE FROM `utilisateurs` WHERE `login` = '$this->login'");
+        session_destroy();
+
+    }
     /*$reqinsert = mysqli_query($bdd, "INSERT INTO utilisateurs(login, password) VALUES ('$login','$mdp')");*/
 
 
@@ -94,7 +101,9 @@ $user->getEmail();
 $user->getFirstname();
 $user->getLastname();
 $user->getAllInfos();
-$user->register("", "jojofou", "jojo", "jojo@aol.com", "Morera", "joan");
-$user->connect("jojofou", "jojo");*/
-$user->disconnect();
+$user->register("", "jojofou", "jojo", "jojo@aol.com", "Morera", "joan");*/
+$user->connect("jojofou", "jojo");
+//$user->disconnect();
+$user->delete();
+var_dump($_SESSION);
 ?>
